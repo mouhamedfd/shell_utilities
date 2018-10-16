@@ -3,9 +3,13 @@
 # Version 0.1 date 2017-February
 # Licence open source
 #------------------------------------------------------------------------
-filename=$1
+set -o posix
+file=$1
+full_directory="$(realpath $1)"
+filename="$(basename $1)"
+directory=${full_directory%${filename}} #two variable substitution
 password=$2
-quality=$3
+density=$3
 key_length=256
 # test  arguments
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] ;then
@@ -19,9 +23,16 @@ elif [ -z $(which qpdf) ] ; then
 	echo "qpdf is not available"
 	echo "installation : apt-get install qpdf | yum install qpdf"
 else
-# Traitement du fichier
-	convert -density $3 $filename c_$filename
-        qpdf --encrypt $password owner$password $key_length --use-aes=y -- c_$filename sc_$filename &&
+# Handling the file
+	convert -density $density $directory/$filename $directory/c_$filename
+        qpdf --encrypt $password owner$password $key_length --use-aes=y -- $directory/c_$filename $directory/sc_$filename &&
 	echo "operation done"
 fi
 exit 0
+#------------------------------------------------------------------------------------------
+#Troubleshooting
+# if you have som problems with convert, here is a temporary fix
+# edit the file /etc/ImageMagick-6/policy.xml
+# replace  <policy domain="coder" rights="none" pattern="PDF" />
+# by       <policy domain="coder" rights="read|write" pattern="PDF" />
+#------------------------------------------------------------------------------------------
