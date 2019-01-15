@@ -4,7 +4,7 @@
 # by mouhamedfd
 # go to https://www.ffmpeg.org/ for more info 
 #----------------------------------------------------------------------
-bit_rate= 80k #80kbps
+bit_rate=80k #80kbps
 for i in *.MTS 
 do
 echo "Processing file : "$i "----> "${i%.*}.mp3
