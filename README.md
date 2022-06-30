@@ -1,1 +1,1 @@
-# shell_utilities
+# A Collection of Shell Scripts to automate tasks
