@@ -8,6 +8,7 @@
 #database infos [the same in .pgpass file]
 #put the DB credentials in ~/.pgpass file as :
 #-----------> host:port:dbname:dbuser:dbpassword <--------------------------------
+# Set the permissions to 0600 ---> sudo chmod 0600 ~/.pgpass
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
 dbname=
